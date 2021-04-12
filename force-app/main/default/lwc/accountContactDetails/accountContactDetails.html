@@ -1,0 +1,26 @@
+<template>
+    <lightning-layout>
+        <lightning-layout-item size="3">
+            <template for:each={accounts} for:item="acc">
+                <p key={acc.Id}>
+                    <!-- <a onclick={handleClick} data-id={acc.Id}>{acc.Name}</a>-->
+                    <lightning-card onclick={handleClick} data-id={acc.Id} title={acc.Name}></lightning-card>
+                </p>
+            </template>
+        </lightning-layout-item>
+        <lightning-layout-item size="9">
+            <template if:true={checkSelectedAccount}>
+
+                <lightning-datatable key-field="Id" data={selectedAccount.Contacts} columns={columns}
+                show-row-number-column
+                hide-checkbox-column
+                onsave={handleSave}
+                draft-values={draftValues}>
+                </lightning-datatable>
+            </template>
+            <template if:false={checkSelectedAccount}>
+                <h1>No Contacts to Display!</h1>
+            </template>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>
